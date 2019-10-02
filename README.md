@@ -18,4 +18,4 @@ npm run build
 npm run build --report
 ```
 
-# Security issues are about nodejs websertver for test reasons. 
+# Security issues in dependencies are about nodejs websertver for test reasons. 
