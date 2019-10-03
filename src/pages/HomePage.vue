@@ -43,19 +43,21 @@ export default {
         PageNumber: 1,
       };
       this.pageOfMovies = [];
+      
+      $router.query = event.target.value.trim();
       if( event.target.value.trim()!="")
         params.query=encodeURI(event.target.value)
         this.getMovies(params, function() {});
-      
     },
     clickCallback: function(pageNum) {
       let params = {
         PageNumber: pageNum
       };
+      this.page = pageNum;
+      $router.PageNumber = pageNum;
       this.getMovies(params, function() {});
     },
     onAction(action, id, index) {
-      console.log('slot action: ' +id)
       $router.push("/movie/" + id);
     },
     getMovies(params, callback) {
@@ -73,10 +75,12 @@ export default {
     }
   },
   mounted() {
-    
     let params = {
-      PageNumber: 1
+      PageNumber:$router.PageNumber?$router.PageNumber: 1
     };
+    this.page = $router.PageNumber?$router.PageNumber: 1;
+    if($router.query && $router.query.trim()!="")
+      params.query;
     this.getMovies(params, function() {});
   }
 };
